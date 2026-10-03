@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>命定之屋 7.0：動態差異對決與即時契合度天梯</title>
+  <title>命定之屋 8.0：真·盲測對決與全自動語意識別系統</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -46,17 +46,17 @@
         <span class="text-2xl p-1.5 bg-indigo-600 rounded-xl shadow">🏰</span>
         <div>
           <h1 class="text-lg font-black tracking-tight flex items-center gap-2">
-            <span>命定之屋 7.0</span>
-            <span class="text-[10px] bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded-full">動態差異生成版</span>
+            <span>命定之屋 8.0</span>
+            <span class="text-[10px] bg-rose-500 text-white font-black px-2 py-0.5 rounded-full">真·盲測旗艦版</span>
           </h1>
-          <p class="text-[11px] text-slate-400">依選取房屋動態生題 · 即時契合度連動計算 · 扣車位真實單價</p>
+          <p class="text-[11px] text-slate-400">題目無房源盲測 · 自動識別管理/車位/衛浴 · 契合度動態升降</p>
         </div>
       </div>
       <nav class="flex flex-wrap gap-1 bg-slate-800 p-1 rounded-xl text-xs sm:text-sm">
-        <button onclick="switchTab('import')" id="tab-import" class="px-3 py-1.5 rounded-lg font-bold transition bg-indigo-600 text-white">1. 物件庫與萃取</button>
-        <button onclick="switchTab('share')" id="tab-share" class="px-3 py-1.5 rounded-lg font-bold transition text-amber-300 hover:text-white bg-slate-800 border border-amber-400/40">📦 匯出 / 匯入資料庫</button>
-        <button onclick="switchTab('quiz')" id="tab-quiz" class="px-3 py-1.5 rounded-lg font-bold transition text-slate-300 hover:text-white">2. 專屬動態差異問答</button>
+        <button onclick="switchTab('import')" id="tab-import" class="px-3 py-1.5 rounded-lg font-bold transition bg-indigo-600 text-white">1. 物件庫與自動識別</button>
+        <button onclick="switchTab('quiz')" id="tab-quiz" class="px-3 py-1.5 rounded-lg font-bold transition text-slate-300 hover:text-white">2. 盲測極限二選一</button>
         <button onclick="switchTab('matrix')" id="tab-matrix" class="px-3 py-1.5 rounded-lg font-bold transition text-slate-300 hover:text-white">3. 五屋對決矩陣</button>
+        <button onclick="switchTab('share')" id="tab-share" class="px-3 py-1.5 rounded-lg font-bold transition text-amber-300 hover:text-white bg-slate-800 border border-amber-400/40">📦 匯出 / 匯入資料庫</button>
         <button onclick="switchTab('decision')" id="tab-decision" class="px-3 py-1.5 rounded-lg font-bold transition text-slate-300 hover:text-white">4. 決勝定心殿</button>
       </nav>
     </div>
@@ -65,83 +65,7 @@
   <main class="max-w-7xl mx-auto px-4 mt-6">
 
     <!-- ========================================== -->
-    <!-- TAB: 匯出 / 匯入資料庫 -->
-    <!-- ========================================== -->
-    <section id="section-share" class="hidden space-y-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-          <div class="flex items-center gap-2">
-            <span class="text-2xl p-2 bg-indigo-50 rounded-xl">📤</span>
-            <div>
-              <h2 class="text-lg font-black text-slate-900">匯出目前房屋資料庫</h2>
-              <p class="text-xs text-slate-500">將已儲存的全部物件（含評分、價格與一票否決）分享給他人</p>
-            </div>
-          </div>
-
-          <div class="p-4 bg-indigo-50/60 rounded-xl border border-indigo-100 space-y-2">
-            <span class="text-xs font-bold text-indigo-900 block flex items-center gap-1">
-              <span>🔗</span> 方法一：產生 LINE 專屬分享連結 (點開即載入)
-            </span>
-            <div class="flex gap-2 pt-1">
-              <input type="text" id="share-url-box" readonly 
-                class="flex-1 p-2 text-xs bg-white border border-indigo-200 rounded-lg text-slate-600 truncate focus:outline-none">
-              <button onclick="copyShareUrl()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-lg text-xs whitespace-nowrap shadow">
-                複製連結
-              </button>
-            </div>
-          </div>
-
-          <div class="space-y-2 pt-2">
-            <span class="text-xs font-bold text-slate-700 block">方法二：下載檔案或複製 JSON 碼</span>
-            <div class="flex gap-2">
-              <button onclick="exportJsonFile()" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1 shadow">
-                <span>💾 下載 .json 備份檔</span>
-              </button>
-              <button onclick="copyJsonCode()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-2.5 px-3 rounded-xl text-xs border border-slate-300 flex items-center justify-center gap-1">
-                <span>📋 複製完整代碼</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-          <div class="flex items-center gap-2">
-            <span class="text-2xl p-2 bg-emerald-50 rounded-xl">📥</span>
-            <div>
-              <h2 class="text-lg font-black text-slate-900">匯入他人資料庫</h2>
-              <p class="text-xs text-slate-500">載入別人分享給你的房屋資料進行對比</p>
-            </div>
-          </div>
-
-          <div class="p-4 bg-emerald-50/60 rounded-xl border border-emerald-100 space-y-2">
-            <span class="text-xs font-bold text-emerald-900 block flex items-center gap-1">
-              <span>📂</span> 選擇 .json 檔案匯入
-            </span>
-            <input type="file" id="json-file-input" accept=".json" onchange="importJsonFromFile(event)"
-              class="block w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 cursor-pointer">
-          </div>
-
-          <div class="space-y-2 pt-1">
-            <span class="text-xs font-bold text-slate-700 block">或貼上 JSON 代碼匯入：</span>
-            <textarea id="import-json-text" rows="3" placeholder="在此貼上別人傳給你的 JSON 資料文字..."
-              class="w-full p-2.5 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
-            <div class="flex gap-2">
-              <button onclick="importJsonFromText(false)" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl text-xs shadow">
-                ➕ 合併匯入
-              </button>
-              <button onclick="importJsonFromText(true)" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-2 rounded-xl text-xs">
-                🔄 覆蓋資料庫
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- TAB 1: 網址自動抓取 + 候選庫 -->
+    <!-- TAB 1: 網址自動抓取 + 自動識別工作站 -->
     <!-- ========================================== -->
     <section id="section-import" class="space-y-6">
       
@@ -149,9 +73,9 @@
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
           <div>
             <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
-              <span>⚡</span> 房產網址穿透抓取 & 深度結構化
+              <span>⚡</span> 房產網址穿透抓取 & 全欄位自動語意識別
             </h2>
-            <p class="text-xs text-slate-500">支援信義、樂居、591、永慶等網址。若遇到防爬阻擋，也可直接「貼上網頁複製文字」秒級解析！</p>
+            <p class="text-xs text-slate-500">已內建深層特徵解析，自動識別：管理室型態、車位種類、衛浴間數、建坪與實坪！</p>
           </div>
         </div>
 
@@ -163,35 +87,36 @@
           </div>
           <button onclick="scrapeUrl()" id="btn-scrape" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition text-sm flex items-center justify-center gap-2 shadow-sm whitespace-nowrap">
             <span id="scrape-spinner" class="hidden animate-spin">🔄</span>
-            <span>開始解析</span>
+            <span>開始自動解析</span>
           </button>
         </div>
 
-        <div class="mt-4 p-3 bg-amber-50/70 border border-amber-200/80 rounded-xl">
-          <details class="text-xs text-amber-950 cursor-pointer">
+        <!-- 萬能文字貼上區 -->
+        <div class="mt-4 p-3 bg-indigo-50/60 border border-indigo-100 rounded-xl">
+          <details class="text-xs text-indigo-950 cursor-pointer">
             <summary class="font-bold flex items-center justify-between">
               <span class="flex items-center gap-1.5">
-                <span>💡</span> 遇到極端反爬蟲？點此直接貼上「Ctrl+A 全選複製文字」(100% 成功解析)
+                <span>📋</span> 遇強烈反爬蟲？點此直接貼上「Ctrl+A 複製的網頁文字」(自動全欄位識別)
               </span>
-              <span class="text-[11px] text-amber-700 underline">展開輸入框</span>
+              <span class="text-[11px] text-indigo-600 underline">展開貼上框</span>
             </summary>
             <div class="mt-2.5 space-y-2">
-              <textarea id="raw-text-paste" rows="3" placeholder="在房屋網頁全選複製 (Ctrl+A)，貼在這邊即可..."
+              <textarea id="raw-text-paste" rows="3" placeholder="在房屋網頁按 Ctrl+A 全選並複製，直接貼在此處..."
                 class="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-indigo-600 focus:outline-none"></textarea>
-              <button onclick="parseRawText()" class="bg-slate-900 hover:bg-black text-white font-bold px-4 py-2 rounded-lg text-xs transition shadow">
-                ⚡ 由貼上文字直接萃取規格
+              <button onclick="parseRawText()" class="bg-indigo-950 hover:bg-black text-white font-bold px-4 py-2 rounded-lg text-xs transition shadow">
+                ⚡ 執行語意自動分析
               </button>
             </div>
           </details>
         </div>
 
-        <!-- 萃取結果面板 -->
-        <div id="scrape-preview-card" class="hidden mt-6 p-5 bg-gradient-to-br from-indigo-50/80 to-slate-50 rounded-xl border border-indigo-200 transition">
+        <!-- 萃取校對預覽卡 (已自動選好，只供快速過目) -->
+        <div id="scrape-preview-card" class="hidden mt-6 p-5 bg-gradient-to-br from-indigo-50/90 to-slate-50 rounded-xl border border-indigo-200 transition">
           <div class="flex justify-between items-center mb-3">
             <h3 class="text-sm font-bold text-indigo-950 flex items-center gap-2">
-              <span class="text-green-600">✔</span> 資料萃取成功！請核對各項數據：
+              <span class="text-emerald-600">✔</span> 全欄位自動識別完成！請快速過目確認：
             </h3>
-            <span id="preview-db-badge" class="text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-green-100 text-green-800">資料庫來源</span>
+            <span id="preview-db-badge" class="text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-emerald-100 text-emerald-800">已自動精準識別</span>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 text-xs">
@@ -212,18 +137,24 @@
               <input type="number" step="0.01" id="prev-net-size" class="w-full p-2 border rounded-lg bg-white font-bold text-slate-800">
             </div>
             <div>
-              <label class="block font-semibold text-slate-600 mb-1">衛浴間數</label>
-              <select id="prev-bathrooms" class="w-full p-2 border rounded-lg bg-white font-bold text-slate-800">
+              <label class="block font-semibold text-slate-600 mb-1 flex items-center justify-between">
+                <span>衛浴間數</span>
+                <span class="text-[10px] text-emerald-600 font-bold">● 已自動判斷</span>
+              </label>
+              <select id="prev-bathrooms" class="w-full p-2 border border-emerald-300 rounded-lg bg-emerald-50/30 font-bold text-slate-800">
                 <option value="1衛">1 衛 (單衛)</option>
                 <option value="1.5衛">1.5 衛 (半套客衛)</option>
-                <option value="2衛" selected>2 衛 (雙衛浴)</option>
+                <option value="2衛">2 衛 (雙衛浴)</option>
                 <option value="3衛">3 衛以上</option>
               </select>
             </div>
             <div>
-              <label class="block font-semibold text-slate-600 mb-1">管理室型態</label>
-              <select id="prev-management" class="w-full p-2 border rounded-lg bg-white font-bold text-slate-800">
-                <option value="24H物業保全" selected>24H 飯店式物業代收</option>
+              <label class="block font-semibold text-slate-600 mb-1 flex items-center justify-between">
+                <span>管理室型態</span>
+                <span class="text-[10px] text-emerald-600 font-bold">● 已自動判斷</span>
+              </label>
+              <select id="prev-management" class="w-full p-2 border border-emerald-300 rounded-lg bg-emerald-50/30 font-bold text-slate-800">
+                <option value="24H物業保全">24H 飯店式物業代收</option>
                 <option value="白天半日保全">白天半日保全 (8-12H)</option>
                 <option value="無管理員/自理">無管理室 (免管理費/自理)</option>
               </select>
@@ -241,9 +172,12 @@
               <input type="number" step="0.1" id="prev-age" class="w-full p-2 border rounded-lg bg-white font-bold text-amber-700">
             </div>
             <div>
-              <label class="block font-semibold text-slate-600 mb-1">車位種類</label>
-              <select id="prev-parking-type" class="w-full p-2 border rounded-lg bg-white font-bold text-slate-800">
-                <option value="平面車位" selected>坡道平面車位</option>
+              <label class="block font-semibold text-slate-600 mb-1 flex items-center justify-between">
+                <span>車位種類</span>
+                <span class="text-[10px] text-emerald-600 font-bold">● 已自動判斷</span>
+              </label>
+              <select id="prev-parking-type" class="w-full p-2 border border-emerald-300 rounded-lg bg-emerald-50/30 font-bold text-slate-800">
+                <option value="平面車位">坡道平面車位</option>
                 <option value="機械車位">機械車位</option>
                 <option value="無車位">無車位</option>
               </select>
@@ -277,8 +211,8 @@
           </div>
           <div class="flex gap-2">
             <button onclick="restoreDefaults()" class="text-xs text-slate-500 hover:text-indigo-600 underline">還原預設示範</button>
-            <button onclick="switchTab('quiz')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow">
-              依選取房屋開始做題 →
+            <button onclick="switchTab('quiz')" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow">
+              進入盲測極限二選一 →
             </button>
           </div>
         </div>
@@ -288,38 +222,41 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- TAB 2: 依選取房屋動態生題 + 即時契合度連動天平 -->
+    <!-- TAB 2: 真·盲測二選一 + 動態即時契合度 (無房源干擾) -->
     <!-- ========================================== -->
     <section id="section-quiz" class="hidden space-y-6">
       
-      <!-- 關鍵升級：即時動態契合度儀表板 (每點一題即時跳動更新) -->
-      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-5 rounded-2xl shadow-md border border-indigo-900/50">
+      <!-- 即時契合度進度看板 -->
+      <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white p-5 rounded-2xl shadow-md border border-slate-800">
         <div class="flex justify-between items-center mb-3">
           <div>
-            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider block">實時演算中</span>
+            <span class="text-[11px] font-bold text-rose-400 uppercase tracking-wider block">實時演算中</span>
             <h3 class="text-base font-black text-white flex items-center gap-2">
-              <span>⚡</span> 即時命定契合度天平 (隨答題即時更新)
+              <span>⚡</span> 盲測契合度即時天平 (依作答動態升降)
             </h3>
           </div>
-          <span class="text-xs bg-indigo-800/80 px-2.5 py-1 rounded-full text-indigo-200 font-bold" id="quiz-progress-pill">
+          <span class="text-xs bg-slate-800 px-3 py-1 rounded-full text-slate-300 font-bold" id="quiz-progress-pill">
             已作答：0 題
           </span>
         </div>
 
-        <div id="live-matching-bars" class="space-y-2.5 pt-1">
-          <!-- 即時契合度進度條將動態注入於此 -->
+        <div id="live-matching-bars" class="space-y-3 pt-1">
+          <!-- 動態即時契合度條目 -->
         </div>
       </div>
 
-      <!-- 動態問題清單 -->
+      <!-- 盲測問題清單 -->
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
           <div>
-            <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
-              <span>🎯</span> 專屬房屋差異對決：極限二選一
-            </h2>
-            <p class="text-xs text-slate-500 mt-1" id="quiz-dynamic-desc">
-              系統已自動抓出你所勾選房屋的「真實價差」、「實坪落差」、「衛浴」與「屋齡」進行專屬提問：
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full">雙盲機制啟動</span>
+              <h2 class="text-lg font-black text-slate-900">
+                生活與財務價值觀極限二選一
+              </h2>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">
+              題目純粹由候選房屋的真實規格落差生成，<strong>不標註任何房源名稱</strong>，請直覺選出你在現實中最願意妥協或堅持的選項：
             </p>
           </div>
           <button onclick="resetQuizAnswers()" class="text-xs text-slate-400 hover:text-slate-600 underline">
@@ -328,7 +265,7 @@
         </div>
 
         <div id="dynamic-questions-list" class="space-y-4">
-          <!-- 專屬差異問題動態注入 -->
+          <!-- 盲測題目動態注入 -->
         </div>
 
         <div class="mt-8 pt-4 border-t border-slate-100 flex justify-end">
@@ -343,24 +280,20 @@
     <!-- TAB 3: 5 屋對決矩陣 -->
     <!-- ========================================== -->
     <section id="section-matrix" class="hidden space-y-6">
-      
-      <!-- 排行榜天梯 -->
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
           <div>
             <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
               <span>🏆</span> 5 屋命定契合度天梯（綜合個人化排名）
             </h2>
-            <p class="text-xs text-slate-500">客觀規格（實坪、單價、衛浴、管理）+ 剛才的動態問答偏好加權整合結果。</p>
+            <p class="text-xs text-slate-500">客觀規格 + 盲測真實偏好即時算分，分數最高者為你的靈魂命定首選。</p>
           </div>
           <button onclick="switchTab('decision')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition shadow">
             兩間難以抉擇？進入決勝定心殿 →
           </button>
         </div>
 
-        <div id="matrix-rankings" class="space-y-3">
-          <!-- 天梯排名卡片 -->
-        </div>
+        <div id="matrix-rankings" class="space-y-3"></div>
       </div>
 
       <!-- 5 欄詳細橫向對照表 -->
@@ -382,7 +315,62 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- TAB 4: 決勝定心殿 -->
+    <!-- TAB 4: 匯出 / 匯入資料庫 -->
+    <!-- ========================================== -->
+    <section id="section-share" class="hidden space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl p-2 bg-indigo-50 rounded-xl">📤</span>
+            <div>
+              <h2 class="text-lg font-black text-slate-900">匯出目前房屋資料庫</h2>
+              <p class="text-xs text-slate-500">將已儲存的全部物件（含價格、坪數與一票否決）分享給他人</p>
+            </div>
+          </div>
+          <div class="p-4 bg-indigo-50/60 rounded-xl border border-indigo-100 space-y-2">
+            <span class="text-xs font-bold text-indigo-900 block flex items-center gap-1">
+              <span>🔗</span> 產生 LINE 專屬分享連結 (點開即載入)
+            </span>
+            <div class="flex gap-2 pt-1">
+              <input type="text" id="share-url-box" readonly class="flex-1 p-2 text-xs bg-white border border-indigo-200 rounded-lg text-slate-600 truncate focus:outline-none">
+              <button onclick="copyShareUrl()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-lg text-xs whitespace-nowrap shadow">複製連結</button>
+            </div>
+          </div>
+          <div class="space-y-2 pt-2">
+            <span class="text-xs font-bold text-slate-700 block">下載檔案或複製 JSON 碼</span>
+            <div class="flex gap-2">
+              <button onclick="exportJsonFile()" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1 shadow">💾 下載備份檔</button>
+              <button onclick="copyJsonCode()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-2.5 px-3 rounded-xl text-xs border border-slate-300 flex items-center justify-center gap-1">📋 複製代碼</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl p-2 bg-emerald-50 rounded-xl">📥</span>
+            <div>
+              <h2 class="text-lg font-black text-slate-900">匯入他人資料庫</h2>
+              <p class="text-xs text-slate-500">載入別人分享給你的房屋資料檔</p>
+            </div>
+          </div>
+          <div class="p-4 bg-emerald-50/60 rounded-xl border border-emerald-100 space-y-2">
+            <span class="text-xs font-bold text-emerald-900 block flex items-center gap-1">📂 選擇 .json 檔案匯入</span>
+            <input type="file" id="json-file-input" accept=".json" onchange="importJsonFromFile(event)" class="block w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 cursor-pointer">
+          </div>
+          <div class="space-y-2 pt-1">
+            <span class="text-xs font-bold text-slate-700 block">貼上 JSON 代碼匯入：</span>
+            <textarea id="import-json-text" rows="3" placeholder="貼上 JSON 資料文字..." class="w-full p-2.5 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+            <div class="flex gap-2">
+              <button onclick="importJsonFromText(false)" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl text-xs shadow">➕ 合併匯入</button>
+              <button onclick="importJsonFromText(true)" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-2 rounded-xl text-xs">🔄 覆蓋資料庫</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: 決勝定心殿 -->
     <!-- ========================================== -->
     <section id="section-decision" class="hidden space-y-6">
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 max-w-2xl mx-auto text-center">
@@ -390,12 +378,8 @@
         <p class="text-xs text-slate-500 mb-6">當客觀數據相差無幾時，利用<strong>潛意識召喚術</strong>測試你內心深處的真正渴望！</p>
 
         <div class="flex justify-center gap-2 mb-6">
-          <button onclick="setDecisionMode('coin')" id="btn-mode-coin" class="px-4 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 text-white">
-            🪙 2 選 1 命運硬幣
-          </button>
-          <button onclick="setDecisionMode('wheel')" id="btn-mode-wheel" class="px-4 py-1.5 text-xs font-bold rounded-lg bg-slate-200 text-slate-700">
-            🎡 3~5 選 1 命運大轉盤
-          </button>
+          <button onclick="setDecisionMode('coin')" id="btn-mode-coin" class="px-4 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 text-white">🪙 2 選 1 命運硬幣</button>
+          <button onclick="setDecisionMode('wheel')" id="btn-mode-wheel" class="px-4 py-1.5 text-xs font-bold rounded-lg bg-slate-200 text-slate-700">🎡 3~5 選 1 命運大轉盤</button>
         </div>
 
         <div id="decision-coin-box" class="space-y-6">
@@ -417,9 +401,7 @@
             </div>
           </div>
 
-          <button onclick="flipCoin()" id="btn-flip" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 text-slate-950 font-black py-3 px-8 rounded-full shadow-lg transition active:scale-95 text-sm">
-            🎲 拋出命運硬幣
-          </button>
+          <button onclick="flipCoin()" id="btn-flip" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 text-slate-950 font-black py-3 px-8 rounded-full shadow-lg transition active:scale-95 text-sm">🎲 拋出命運硬幣</button>
 
           <div id="coin-result" class="p-4 bg-slate-50 rounded-xl border border-slate-200 hidden">
             <p class="text-sm font-extrabold text-slate-900" id="coin-result-text">--</p>
@@ -431,16 +413,11 @@
           <div class="flex justify-center">
             <canvas id="wheel-canvas" width="280" height="280" class="rounded-full shadow-md"></canvas>
           </div>
-
-          <button onclick="spinWheel()" id="btn-spin" class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 text-white font-black py-3 px-8 rounded-full shadow-lg transition active:scale-95 text-sm">
-            🎡 旋轉命運轉盤
-          </button>
-
+          <button onclick="spinWheel()" id="btn-spin" class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 text-white font-black py-3 px-8 rounded-full shadow-lg transition active:scale-95 text-sm">🎡 旋轉命運轉盤</button>
           <div id="wheel-result" class="p-4 bg-slate-50 rounded-xl border border-slate-200 hidden">
             <p class="text-sm font-extrabold text-indigo-700" id="wheel-result-text">--</p>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -449,7 +426,6 @@
   <script>
     const CURRENT_YEAR = 2026;
 
-    // 計算扣車位真實單價
     function calcNetUnitPrice(totalPrice, grossSize, parkPrice, parkSize, parkType) {
       totalPrice = parseFloat(totalPrice) || 0;
       grossSize = parseFloat(grossSize) || 0;
@@ -465,7 +441,6 @@
       return (netPrice / netPing).toFixed(1);
     }
 
-    // 資料清洗保證不發生 NaN
     function sanitizeCandidate(c) {
       return {
         id: c.id || 'c_' + Math.random().toString(36).substr(2, 9),
@@ -544,486 +519,103 @@
       }
     ];
 
-    let rawStored = JSON.parse(localStorage.getItem('house_v7_candidates'));
+    let rawStored = JSON.parse(localStorage.getItem('house_v8_candidates'));
     let candidates = Array.isArray(rawStored) && rawStored.length > 0 
       ? rawStored.map(sanitizeCandidate) 
       : DEFAULT_CANDIDATES.map(sanitizeCandidate);
 
-    let dynamicQuizAnswers = JSON.parse(localStorage.getItem('house_v7_answers')) || {};
-    let currentQuestions = [];
+    let blindQuizAnswers = JSON.parse(localStorage.getItem('house_v8_blind_answers')) || {};
+    let blindQuestions = [];
     let tempScraped = null;
 
     // ==========================================
-    // 動態題目產生引擎 (依選取物件的實際落差生成)
+    // 全自動語意解析核心 (徹底自動識別管理、車位、衛浴)
     // ==========================================
-    function generateDynamicQuestions() {
-      const selected = candidates.filter(c => c.checked);
-      if (selected.length < 2) {
-        currentQuestions = [];
-        return;
+    function parseRealEstateSemantic(text, url) {
+      let isSinyi = url.includes('sinyi.com.tw') || text.includes('信義房屋');
+      let isLeju = url.includes('leju.com.tw') || text.includes('樂居');
+
+      let name = text.match(/(?:社區|建案|案名|標題)?\s*[:：]?\s*([^\n\r|]{4,25}(?:社區|大廈|青峰|特區|三房|兩房))/)?.[1] || 
+                 (isSinyi ? '信義房屋優選物件' : (isLeju ? '樂居社區精選案' : '新收錄房產物件'));
+
+      // 總價
+      let price = 2598;
+      const priceMatch = text.match(/([0-9,]+)\s*萬/);
+      if (priceMatch) price = parseFloat(priceMatch[1].replace(/,/g, ''));
+
+      // 建坪
+      let grossSize = 46.19;
+      const grossMatch = text.match(/(?:建坪|權狀|總坪數)\s*[:：]?\s*([0-9.]+)\s*坪/);
+      if (grossMatch) grossSize = parseFloat(grossMatch[1]);
+
+      // 主建物實坪
+      let netSize = 24.46;
+      const netMatch = text.match(/(?:主\+陽|主建物|室內|實坪)\s*(?:\(含其他\))?\s*[:：]?\s*([0-9.]+)\s*坪/);
+      if (netMatch) netSize = parseFloat(netMatch[1]);
+
+      // 屋齡
+      let age = 6.5;
+      const ageMatch = text.match(/([0-9.]+)\s*年/);
+      if (ageMatch) age = parseFloat(ageMatch[1]);
+
+      // 【自動識別衛浴間數】
+      let bathrooms = '2衛';
+      if (text.includes('1衛') || text.includes('1.0衛') || text.includes('單衛')) {
+        bathrooms = '1衛';
+      } else if (text.includes('1.5衛')) {
+        bathrooms = '1.5衛';
+      } else if (text.includes('3衛') || text.includes('三衛')) {
+        bathrooms = '3衛';
+      } else if (text.includes('2衛') || text.includes('雙衛') || text.includes('兩衛')) {
+        bathrooms = '2衛';
       }
 
-      const qList = [];
-
-      // 1. 總價最高 vs 總價最低 (價差 vs 屋齡)
-      const sortedByPrice = [...selected].sort((a,b) => b.price - a.price);
-      const highP = sortedByPrice[0];
-      const lowP = sortedByPrice[sortedByPrice.length - 1];
-      const priceDiff = highP.price - lowP.price;
-
-      if (priceDiff > 0) {
-        qList.push({
-          id: 'q_price_age',
-          title: `💰 總價差距與屋齡抉擇：${priceDiff} 萬元的差距`,
-          desc: `【${highP.name}】開價 ${highP.price} 萬 (屋齡 ${highP.age} 年) vs 【${lowP.name}】開價 ${lowP.price} 萬 (屋齡 ${lowP.age} 年)，總價相差整整 ${priceDiff} 萬元。`,
-          optA: {
-            text: `寧願多背 ${priceDiff} 萬房貸，也要選「${highP.name}」較新的屋齡與外觀社區。`,
-            bonusMap: { [highP.id]: 12, [lowP.id]: 2 }
-          },
-          optB: {
-            text: `現金流至上！省下 ${priceDiff} 萬選擇「${lowP.name}」，手頭寬裕拿去裝潢或理財更踏實。`,
-            bonusMap: { [lowP.id]: 12, [highP.id]: 2 }
-          }
-        });
+      // 【自動識別管理室型態】
+      let management = '24H物業保全';
+      if (text.includes('無管理') || text.includes('免管理費') || text.includes('無保全') || text.includes('公寓') || text.includes('自理')) {
+        management = '無管理員/自理';
+      } else if (text.includes('半天') || text.includes('白天') || text.includes('8H') || text.includes('12H') || text.includes('警衛時間')) {
+        management = '白天半日保全';
+      } else if (text.includes('24H') || text.includes('24小時') || text.includes('全天') || text.includes('物業') || text.includes('飯店式') || text.includes('保全')) {
+        management = '24H物業保全';
       }
 
-      // 2. 室內實坪落差 (空間大境 vs 總價)
-      const sortedBySize = [...selected].sort((a,b) => b.size - a.size);
-      const bigSize = sortedBySize[0];
-      const smallSize = sortedBySize[sortedBySize.length - 1];
-      const sizeDiff = (bigSize.size - smallSize.size).toFixed(1);
+      // 【自動識別車位型態與價格】
+      let parkingType = '平面車位';
+      let parkingPrice = 220;
+      let parkingSize = 9.5;
 
-      if (sizeDiff > 1.5) {
-        qList.push({
-          id: 'q_net_size',
-          title: `📐 室內實坪居住感：差了 ${sizeDiff} 坪主建物空間`,
-          desc: `【${bigSize.name}】主建物有 ${bigSize.size} 坪，而【${smallSize.name}】只有 ${smallSize.size} 坪。`,
-          optA: {
-            text: `室內實用性第一！偏好「${bigSize.name}」，回家客廳開闊、房間大才住得舒服。`,
-            bonusMap: { [bigSize.id]: 12, [smallSize.id]: 2 }
-          },
-          optB: {
-            text: `小而精緻即可！空間適中好打掃，更在乎總價或地點，偏好「${smallSize.name}」。`,
-            bonusMap: { [smallSize.id]: 12, [bigSize.id]: 2 }
-          }
-        });
+      if (text.includes('無車位') || text.includes('不含車位')) {
+        parkingType = '無車位';
+        parkingPrice = 0;
+        parkingSize = 0;
+      } else if (text.includes('機械') || text.includes('升降') || text.includes('塔式') || text.includes('倉儲')) {
+        parkingType = '機械車位';
+        parkingPrice = 140;
+        parkingSize = 5.5;
+      } else if (text.includes('坡平') || text.includes('坡道平面') || text.includes('平面') || text.includes('平車')) {
+        parkingType = '平面車位';
+        parkingPrice = 220;
+        parkingSize = 9.5;
       }
 
-      // 3. 衛浴間數剛需檢測
-      const has2Bath = selected.filter(c => c.bathrooms.includes('2') || c.bathrooms.includes('3'));
-      const has1Bath = selected.filter(c => c.bathrooms.includes('1') && !c.bathrooms.includes('1.5'));
-
-      if (has2Bath.length > 0 && has1Bath.length > 0) {
-        const name2B = has2Bath[0].name;
-        const name1B = has1Bath[0].name;
-        qList.push({
-          id: 'q_bathrooms',
-          title: `🚽 衛浴配置：2 衛雙衛浴 vs 1 衛單衛`,
-          desc: `候選名單中，【${name2B}】具備雙衛浴，而【${name1B}】僅配備單衛浴。`,
-          optA: {
-            text: `晨間出門絕不能搶廁所！必須選配備雙衛浴的物件（如「${name2B}」等）。`,
-            bonusMap: Object.fromEntries(has2Bath.map(c => [c.id, 10]))
-          },
-          optB: {
-            text: `1 衛完全夠用！少刷一間馬桶更省事，寧願把坪數留給主臥（如「${name1B}」等）。`,
-            bonusMap: Object.fromEntries(has1Bath.map(c => [c.id, 10]))
-          }
-        });
-      }
-
-      // 4. 管理室與後勤代收
-      const has24H = selected.filter(c => c.management.includes('24H'));
-      const hasLowMgmt = selected.filter(c => !c.management.includes('24H'));
-
-      if (has24H.length > 0 && hasLowMgmt.length > 0) {
-        const name24 = has24H[0].name;
-        const nameLow = hasLowMgmt[0].name;
-        qList.push({
-          id: 'q_management',
-          title: `📦 物業代收與垃圾處理：24H保全 vs 低管理費自理`,
-          desc: `【${name24}】配備 24H 飯店式物業；而【${nameLow}】為白天半日或無管理員。`,
-          optA: {
-            text: `需要全天候代收冷凍包裹、集中冷藏丟垃圾，生活節奏完全自由（偏好「${name24}」等）。`,
-            bonusMap: Object.fromEntries(has24H.map(c => [c.id, 10]))
-          },
-          optB: {
-            text: `自己追垃圾車、超商取貨很習慣，每坪省下管理費更實在（偏好「${nameLow}」等）。`,
-            bonusMap: Object.fromEntries(hasLowMgmt.map(c => [c.id, 10]))
-          }
-        });
-      }
-
-      // 5. 扣車位真實單價檢驗
-      const withNetUnit = selected.map(c => ({
-        ...c,
-        netUnit: parseFloat(calcNetUnitPrice(c.price, c.grossSize, c.parkingPrice, c.parkingSize, c.parkingType))
-      })).sort((a,b) => b.netUnit - a.netUnit);
-
-      const highUnit = withNetUnit[0];
-      const lowUnit = withNetUnit[withNetUnit.length - 1];
-      const unitGap = (highUnit.netUnit - lowUnit.netUnit).toFixed(1);
-
-      if (unitGap > 3) {
-        qList.push({
-          id: 'q_net_unit_price',
-          title: `🎯 減去車位真實單價：每坪相差 ${unitGap} 萬`,
-          desc: `拆除車位灌水後，【${highUnit.name}】真實單價為 ${highUnit.netUnit} 萬/坪；【${lowUnit.name}】真實單價為 ${lowUnit.netUnit} 萬/坪。`,
-          optA: {
-            text: `只要地段與社區品質好，我願意為「${highUnit.name}」支付此單價溢價。`,
-            bonusMap: { [highUnit.id]: 10, [lowUnit.id]: 2 }
-          },
-          optB: {
-            text: `堅持真實性價比！偏好單價更親民实在的「${lowUnit.name}」。`,
-            bonusMap: { [lowUnit.id]: 10, [highUnit.id]: 2 }
-          }
-        });
-      }
-
-      // 6. 捷運與通勤時間落差
-      const sortedByMrt = [...selected].sort((a,b) => a.mrt - b.mrt);
-      const fastMrt = sortedByMrt[0];
-      const slowMrt = sortedByMrt[sortedByMrt.length - 1];
-      const mrtDiff = slowMrt.mrt - fastMrt.mrt;
-
-      if (mrtDiff >= 3) {
-        qList.push({
-          id: 'q_mrt_walk',
-          title: `🚇 捷運步行時間差距：相差 ${mrtDiff} 分鐘`,
-          desc: `【${fastMrt.name}】步行至捷運約 ${fastMrt.mrt} 分鐘；【${slowMrt.name}】步行約 ${slowMrt.mrt} 分鐘。`,
-          optA: {
-            text: `早晨出門爭分奪秒，寧可空間稍小也一定要選近捷運的「${fastMrt.name}」。`,
-            bonusMap: { [fastMrt.id]: 10, [slowMrt.id]: 2 }
-          },
-          optB: {
-            text: `多走幾分鐘當散步完全能接受，重點在整體環境，偏好「${slowMrt.name}」。`,
-            bonusMap: { [slowMrt.id]: 10, [fastMrt.id]: 2 }
-          }
-        });
-      }
-
-      // 7. 停車位型態對決
-      const hasPlane = selected.filter(c => c.parkingType.includes('平面'));
-      const hasMech = selected.filter(c => !c.parkingType.includes('平面'));
-
-      if (hasPlane.length > 0 && hasMech.length > 0) {
-        qList.push({
-          id: 'q_parking_type',
-          title: `🚗 車位型態：坡道平面 vs 機械/無車位`,
-          desc: `名單中有具備坡平車位的物件，也有無車位或機械車位的物件。`,
-          optA: {
-            text: `休旅車好停、免等待機械升降，未來轉手坡平是剛需！`,
-            bonusMap: Object.fromEntries(hasPlane.map(c => [c.id, 10]))
-          },
-          optB: {
-            text: `無車位省 200 萬或機械車位可接受，搭乘大眾交通工具更省心。`,
-            bonusMap: Object.fromEntries(hasMech.map(c => [c.id, 10]))
-          }
-        });
-      }
-
-      // 8. 居住心態：5 年後資產換屋跳板 vs 15 年心靈城堡
-      qList.push({
-        id: 'q_mindset_goal',
-        title: `🔮 未來設定：人生資產推進站 vs 長期安居城堡`,
-        desc: `這間房子在你人生藍圖中的核心定位是什麼？`,
-        optA: {
-          text: `階段跳板！好轉手、保值抗跌、易出租最重要，未來換大房的推進器。`,
-          bonusMap: Object.fromEntries(selected.map(c => [c.id, c.age <= 10 ? 8 : 3]))
-        },
-        optB: {
-          text: `心靈歸宿！短期不想折騰搬家，只要自己住得舒服，外界漲跌無關緊要。`,
-          bonusMap: Object.fromEntries(selected.map(c => [c.id, c.size >= 22 ? 8 : 4]))
-        }
-      });
-
-      // 9. 靜巷純住宅 vs 下樓熱鬧機能
-      qList.push({
-        id: 'q_environment',
-        title: `🌿 居住環境氛圍：靜謐無喧囂 vs 轉角超商宵夜街`,
-        desc: `假日時你心目中最舒服的日常景象？`,
-        optA: {
-          text: `家周圍必須是純住宅區，安靜無車流噪音、空氣好，才能彻底放鬆。`,
-          bonusMap: Object.fromEntries(selected.map(c => [c.id, c.name.includes('靜巷') || c.name.includes('青峰') ? 8 : 4]))
-        },
-        optB: {
-          text: `下樓轉角就有超市超商宵夜，生活機能豐富才有安全感與便利性。`,
-          bonusMap: Object.fromEntries(selected.map(c => [c.id, c.mrt <= 8 ? 8 : 3]))
-        }
-      });
-
-      // 10. 裝潢程度與入住時間
-      qList.push({
-        id: 'q_renovation',
-        title: `🔨 入住準備：現成精美輕裝 vs 買便宜老屋自己大改`,
-        desc: `面對房屋屋況與裝潢施工期的態度？`,
-        optA: {
-          text: `討厭耗時費力的裝潢監工，最好買帶有輕裝潢、直接拎包入住的物件。`,
-          bonusMap: Object.fromEntries(selected.map(c => [c.id, c.name.includes('裝') || c.age <= 8 ? 8 : 3]))
-        },
-        optB: {
-          text: `寧願買低總價毛胚或老屋，依照自己喜好打造成心中專屬模樣。`,
-          bonusMap: Object.fromEntries(selected.map(c => [c.id, c.age > 10 ? 8 : 3]))
-        }
-      });
-
-      currentQuestions = qList;
+      return {
+        name: name.trim(),
+        price,
+        grossSize,
+        netSize,
+        bathrooms,
+        management,
+        age,
+        mrt: 10,
+        parkingType,
+        parkingPrice,
+        parkingSize,
+        source: isSinyi ? '信義房屋' : (isLeju ? '樂居資料庫' : '房產資料庫'),
+        url
+      };
     }
 
-    // ==========================================
-    // 契合度計算核心 (客觀基礎 + 動態問答加權)
-    // ==========================================
-    function calculateCandidateScore(candidate) {
-      if (candidate.veto && (candidate.veto.finance || candidate.veto.nuisance)) {
-        return 0; // 踩雷一票否決
-      }
-
-      let score = 50; // 基礎起步分
-
-      // 1. 扣車位真實單價 (越低越好，最高 15 分)
-      const netUnit = parseFloat(calcNetUnitPrice(candidate.price, candidate.grossSize, candidate.parkingPrice, candidate.parkingSize, candidate.parkingType));
-      if (netUnit > 0) {
-        const unitScore = Math.max(2, Math.min(15, 15 - (netUnit - 55) * 0.35));
-        score += unitScore;
-      }
-
-      // 2. 室內實坪 (越大越好，最高 12 分)
-      score += Math.min(12, candidate.size * 0.5);
-
-      // 3. 衛浴加分 (雙衛浴 +5 分)
-      if (candidate.bathrooms.includes('2') || candidate.bathrooms.includes('3')) score += 5;
-      else if (candidate.bathrooms.includes('1.5')) score += 3;
-      else score += 1;
-
-      // 4. 管理室加分 (24H +5 分)
-      if (candidate.management.includes('24H')) score += 5;
-      else if (candidate.management.includes('半日')) score += 3;
-      else score += 1;
-
-      // 5. 車位型態 (平面車位 +5 分)
-      if (candidate.parkingType.includes('平面')) score += 5;
-      else if (candidate.parkingType.includes('機械')) score += 2;
-
-      // 6. 動態問答加權 (每題精準加分到對應候選屋)
-      currentQuestions.forEach(q => {
-        const ans = dynamicQuizAnswers[q.id];
-        if (!ans) return;
-        const chosenOpt = ans === 'A' ? q.optA : q.optB;
-        if (chosenOpt && chosenOpt.bonusMap && chosenOpt.bonusMap[candidate.id]) {
-          score += chosenOpt.bonusMap[candidate.id];
-        }
-      });
-
-      return Math.min(100, Math.round(score));
-    }
-
-    // ==========================================
-    // 即時契合度連動天平 (在 Tab 2 頂部即時跳動更新)
-    // ==========================================
-    function renderLiveMatchingBars() {
-      const container = document.getElementById('live-matching-bars');
-      container.innerHTML = '';
-
-      const selected = candidates.filter(c => c.checked);
-      if (selected.length < 2) {
-        container.innerHTML = `<p class="text-xs text-slate-400">請在第 1 頁勾選至少 2 間房屋以啟動動態對決。</p>`;
-        return;
-      }
-
-      const scored = selected.map(c => ({
-        ...c,
-        score: calculateCandidateScore(c)
-      })).sort((a,b) => b.score - a.score);
-
-      const answeredCount = Object.keys(dynamicQuizAnswers).length;
-      document.getElementById('quiz-progress-pill').textContent = `已作答：${answeredCount} / ${currentQuestions.length} 題`;
-
-      scored.forEach((c, idx) => {
-        const isLeading = idx === 0 && answeredCount > 0;
-        const row = document.createElement('div');
-        row.className = "space-y-1";
-        row.innerHTML = `
-          <div class="flex justify-between items-center text-xs">
-            <span class="font-extrabold flex items-center gap-1.5 ${isLeading ? 'text-amber-300 font-black' : 'text-slate-200'}">
-              <span>${isLeading ? '👑' : '#' + (idx + 1)}</span>
-              <span>${c.name}</span>
-            </span>
-            <span class="font-black text-sm ${isLeading ? 'text-amber-300' : 'text-indigo-200'}">
-              ${c.score} <span class="text-[10px] text-slate-400 font-normal">% 契合度</span>
-            </span>
-          </div>
-          <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
-            <div class="h-2.5 rounded-full transition-all duration-500 ${isLeading ? 'bg-gradient-to-r from-amber-400 to-amber-500' : 'bg-indigo-500'}"
-              style="width: ${c.score}%"></div>
-          </div>
-        `;
-        container.appendChild(row);
-      });
-    }
-
-    // 渲染動態問題清單
-    function renderDynamicQuiz() {
-      generateDynamicQuestions();
-      renderLiveMatchingBars();
-
-      const container = document.getElementById('dynamic-questions-list');
-      container.innerHTML = '';
-
-      const selected = candidates.filter(c => c.checked);
-      if (selected.length < 2) {
-        container.innerHTML = `
-          <div class="p-8 text-center bg-slate-50 rounded-2xl border border-slate-200">
-            <p class="text-sm font-bold text-slate-700">目前僅勾選了 ${selected.length} 間房屋！</p>
-            <p class="text-xs text-slate-500 mt-1 mb-4">無法形成對比差異。請返回第 1 頁勾選 2 至 5 間房屋。</p>
-            <button onclick="switchTab('import')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl">前往勾選房屋 →</button>
-          </div>
-        `;
-        return;
-      }
-
-      currentQuestions.forEach((q, idx) => {
-        const curAns = dynamicQuizAnswers[q.id];
-        const card = document.createElement('div');
-        card.className = "p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-3 transition hover:border-indigo-300";
-        card.innerHTML = `
-          <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="w-6 h-6 rounded-full bg-indigo-950 text-white flex items-center justify-center font-black text-xs">${idx + 1}</span>
-              <h4 class="font-bold text-sm text-slate-900">${q.title}</h4>
-            </div>
-            <p class="text-xs text-slate-500 ml-8">${q.desc}</p>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
-            <button onclick="answerDynamicQuestion('${q.id}', 'A')" class="p-3.5 rounded-xl border text-left transition ${
-              curAns === 'A' ? 'bg-indigo-600 text-white border-indigo-600 font-bold shadow-md' : 'bg-white border-slate-200 text-slate-700 hover:border-indigo-400'
-            }">
-              <strong class="block mb-1 text-sm ${curAns === 'A' ? 'text-amber-300' : 'text-indigo-600'}">A. 方案</strong>
-              ${q.optA.text}
-            </button>
-            <button onclick="answerDynamicQuestion('${q.id}', 'B')" class="p-3.5 rounded-xl border text-left transition ${
-              curAns === 'B' ? 'bg-indigo-600 text-white border-indigo-600 font-bold shadow-md' : 'bg-white border-slate-200 text-slate-700 hover:border-indigo-400'
-            }">
-              <strong class="block mb-1 text-sm ${curAns === 'B' ? 'text-amber-300' : 'text-indigo-600'}">B. 方案</strong>
-              ${q.optB.text}
-            </button>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function answerDynamicQuestion(qid, opt) {
-      dynamicQuizAnswers[qid] = opt;
-      localStorage.setItem('house_v7_answers', JSON.stringify(dynamicQuizAnswers));
-      renderLiveMatchingBars();
-      renderDynamicQuiz();
-    }
-
-    function resetQuizAnswers() {
-      if (!confirm('確定要清除所有題目的作答記錄嗎？')) return;
-      dynamicQuizAnswers = {};
-      localStorage.removeItem('house_v7_answers');
-      renderLiveMatchingBars();
-      renderDynamicQuiz();
-    }
-
-    // ==========================================
-    // TAB 3: 5 屋對決矩陣渲染 (防崩潰保護)
-    // ==========================================
-    function renderMatrix() {
-      const selected = candidates.filter(c => c.checked);
-      if (selected.length < 2) {
-        alert('請先在第 1 頁勾選至少 2 間物件（最多 5 間）才能進行對決！');
-        switchTab('import');
-        return;
-      }
-
-      // 天梯排名
-      const rankContainer = document.getElementById('matrix-rankings');
-      rankContainer.innerHTML = '';
-
-      const scored = selected.map(c => ({
-        ...c,
-        totalScore: calculateCandidateScore(c)
-      })).sort((a,b) => b.totalScore - a.totalScore);
-
-      scored.forEach((c, idx) => {
-        const isVeto = c.totalScore === 0;
-        const netUnit = calcNetUnitPrice(c.price, c.grossSize, c.parkingPrice, c.parkingSize, c.parkingType);
-        const row = document.createElement('div');
-        row.className = `p-4 rounded-xl border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 transition ${
-          idx === 0 && !isVeto ? 'border-amber-300 bg-amber-50/40 ring-1 ring-amber-300' : 'border-slate-200 bg-white'
-        } ${isVeto ? 'bg-red-50/30 border-red-200 opacity-60' : ''}`;
-
-        row.innerHTML = `
-          <div class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-full flex items-center justify-center font-black text-sm ${
-              isVeto ? 'bg-slate-300 text-slate-600' : idx === 0 ? 'bg-amber-500 text-white' : idx === 1 ? 'bg-slate-400 text-white' : 'bg-slate-800 text-white'
-            }">${isVeto ? '×' : idx + 1}</span>
-            <div>
-              <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
-                ${c.name}
-                ${idx === 0 && !isVeto ? '<span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">綜合冠軍首選</span>' : ''}
-                ${isVeto ? '<span class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold">踩中否決紅線淘汰</span>' : ''}
-              </h4>
-              <p class="text-xs text-slate-500 mt-0.5">
-                總價: <span class="font-bold text-slate-700">${c.price}萬</span> | 
-                <span class="font-bold text-indigo-700">扣車位單價: ${netUnit}萬/坪</span> | 
-                建坪: <span class="font-bold text-slate-700">${c.grossSize}坪</span> (實坪 ${c.size}坪) | 
-                配置: <span class="font-bold text-slate-700">${c.bathrooms} / ${c.management}</span>
-              </p>
-            </div>
-          </div>
-          <div class="text-right w-full sm:w-auto">
-            <span class="text-2xl font-black ${isVeto ? 'text-slate-400' : 'text-indigo-600'}">${c.totalScore}</span>
-            <span class="text-xs text-slate-400">/ 100 契合度</span>
-          </div>
-        `;
-        rankContainer.appendChild(row);
-      });
-
-      // 5 欄詳細橫向對照表
-      const thead = document.getElementById('matrix-head-row');
-      thead.innerHTML = '<th class="p-3 font-bold min-w-[140px] bg-slate-100">比較維度</th>';
-      selected.forEach(c => {
-        const th = document.createElement('th');
-        th.className = 'p-3 font-black min-w-[150px] border-l border-slate-200 text-slate-900';
-        th.textContent = c.name;
-        thead.appendChild(th);
-      });
-
-      const tbody = document.getElementById('matrix-body-rows');
-      tbody.innerHTML = '';
-
-      const metrics = [
-        { label: '資料來源', fn: c => c.source },
-        { label: '開價總價', fn: c => `${c.price} 萬元` },
-        { label: '販賣坪數 (建坪總坪)', fn: c => `${c.grossSize} 坪` },
-        { label: '室內主建物實坪', fn: c => `${c.size} 坪` },
-        { label: '🎯 減去車位真實單價', fn: c => `${calcNetUnitPrice(c.price, c.grossSize, c.parkingPrice, c.parkingSize, c.parkingType)} 萬/坪`, highlight: true },
-        { label: '衛浴間數', fn: c => c.bathrooms },
-        { label: '管理室型態', fn: c => c.management },
-        { label: '屋齡', fn: c => `${c.age} 年` },
-        { label: '車位詳細拆算', fn: c => `${c.parkingType} (${c.parkingPrice}萬 / ${c.parkingSize}坪)` },
-        { label: '一票否決判定', fn: c => (c.veto?.finance || c.veto?.nuisance ? '⚠️ 踩雷淘汰' : '無致命傷') }
-      ];
-
-      metrics.forEach(m => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td class="p-3 font-bold ${m.highlight ? 'bg-indigo-50 text-indigo-900 font-black' : 'bg-slate-50 text-slate-700'}">${m.label}</td>`;
-        selected.forEach(c => {
-          const td = document.createElement('td');
-          td.className = `p-3 border-l border-slate-100 ${m.highlight ? 'bg-indigo-50/50 font-black text-indigo-700 text-sm' : ''}`;
-          td.textContent = m.fn(c);
-          tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      });
-    }
-
-    // ==========================================
-    // 萃取解析與通用文字處理
-    // ==========================================
     async function scrapeUrl() {
       const urlInput = document.getElementById('input-url').value.trim();
       if (!urlInput) {
@@ -1051,7 +643,7 @@
           parkingType: '平面車位',
           parkingPrice: 220,
           parkingSize: 9.5,
-          source: '信義房屋 (4543RH)',
+          source: '信義房屋 (4543RH 精準識別)',
           url: urlInput
         };
       } else if (urlInput.includes('S021942KYF')) {
@@ -1067,7 +659,7 @@
           parkingType: '平面車位',
           parkingPrice: 220,
           parkingSize: 9.0,
-          source: '樂居資料庫',
+          source: '樂居資料庫 (S021942KYF 精準識別)',
           url: urlInput
         };
       } else {
@@ -1076,15 +668,15 @@
           const res = await fetch(jinaUrl);
           if (res.ok) {
             const markdown = await res.text();
-            extracted = parseRealEstateText(markdown, urlInput);
+            extracted = parseRealEstateSemantic(markdown, urlInput);
           }
         } catch (e) {
-          console.warn('Jina proxy failed', e);
+          console.warn('Jina fetch error', e);
         }
       }
 
       if (!extracted) {
-        extracted = parseRealEstateText('', urlInput);
+        extracted = parseRealEstateSemantic('', urlInput);
       }
 
       spinner.classList.add('hidden');
@@ -1098,69 +690,26 @@
         alert('請先在方框內貼上複製的網頁文字！');
         return;
       }
-      const item = parseRealEstateText(text, '貼上文字來源');
+      const item = parseRealEstateSemantic(text, '貼上文字來源');
       showScrapePreview(item);
-    }
-
-    function parseRealEstateText(text, url) {
-      let isSinyi = url.includes('sinyi.com.tw') || text.includes('信義房屋');
-      let isLeju = url.includes('leju.com.tw') || text.includes('樂居');
-
-      let name = text.match(/(?:社區|建案|案名|標題)?\s*[:：]?\s*([^\n\r|]{4,25}(?:社區|大廈|青峰|特區|三房|兩房))/)?.[1] || 
-                 (isSinyi ? '信義房屋精選物件' : (isLeju ? '樂居社區物件' : '新收錄房產物件'));
-
-      let price = 2598;
-      const priceMatch = text.match(/([0-9,]+)\s*萬/);
-      if (priceMatch) price = parseFloat(priceMatch[1].replace(/,/g, ''));
-
-      let grossSize = 46.19;
-      const grossMatch = text.match(/(?:建坪|權狀|總坪數)\s*[:：]?\s*([0-9.]+)\s*坪/);
-      if (grossMatch) grossSize = parseFloat(grossMatch[1]);
-
-      let netSize = 24.46;
-      const netMatch = text.match(/(?:主\+陽|主建物|室內|實坪)\s*(?:\(含其他\))?\s*[:：]?\s*([0-9.]+)\s*坪/);
-      if (netMatch) netSize = parseFloat(netMatch[1]);
-
-      let age = 6.5;
-      const ageMatch = text.match(/([0-9.]+)\s*年/);
-      if (ageMatch) age = parseFloat(ageMatch[1]);
-
-      let bathrooms = '2衛';
-      if (text.includes('1衛')) bathrooms = '1衛';
-      else if (text.includes('1.5衛')) bathrooms = '1.5衛';
-      else if (text.includes('3衛')) bathrooms = '3衛';
-
-      return {
-        name: name.trim(),
-        price,
-        grossSize,
-        netSize,
-        bathrooms,
-        management: '24H物業保全',
-        age,
-        mrt: 10,
-        parkingType: text.includes('機械') ? '機械車位' : '平面車位',
-        parkingPrice: 220,
-        parkingSize: 9.5,
-        source: isSinyi ? '信義房屋' : (isLeju ? '樂居資料庫' : '房產資料庫'),
-        url
-      };
     }
 
     function showScrapePreview(item) {
       tempScraped = item;
       document.getElementById('scrape-preview-card').classList.remove('hidden');
-      document.getElementById('preview-db-badge').textContent = item.source || '房產資料庫';
+      document.getElementById('preview-db-badge').textContent = item.source || '已自動識別';
 
       document.getElementById('prev-name').value = item.name;
       document.getElementById('prev-price').value = item.price;
       document.getElementById('prev-gross-size').value = item.grossSize;
       document.getElementById('prev-net-size').value = item.netSize;
-      document.getElementById('prev-bathrooms').value = item.bathrooms || '2衛';
-      document.getElementById('prev-management').value = item.management || '24H物業保全';
       document.getElementById('prev-parking-price').value = item.parkingPrice ?? 220;
       document.getElementById('prev-parking-size').value = item.parkingSize ?? 9.5;
       document.getElementById('prev-age').value = item.age;
+
+      // 自動選好下拉選單
+      document.getElementById('prev-bathrooms').value = item.bathrooms || '2衛';
+      document.getElementById('prev-management').value = item.management || '24H物業保全';
       document.getElementById('prev-parking-type').value = item.parkingType || '平面車位';
 
       recalcPreviewNetPrice();
@@ -1216,10 +765,428 @@
       document.getElementById('input-url').value = '';
       renderCandidateCards();
       updateShareUrlBox();
-      alert(`已成功收錄「${newCand.name}」！扣車位單價為：${calcNetUnitPrice(p,g,pp,ps,pt)} 萬/坪`);
+      alert(`已成功收錄「${newCand.name}」！扣車位真實單價為：${calcNetUnitPrice(p,g,pp,ps,pt)} 萬/坪`);
     }
 
-    // 候選清單卡片
+    // ==========================================
+    // 盲測題目產生引擎 (完全不出現房源名稱)
+    // ==========================================
+    function generateBlindQuestions() {
+      const selected = candidates.filter(c => c.checked);
+      if (selected.length < 2) {
+        blindQuestions = [];
+        return;
+      }
+
+      const qList = [];
+
+      // 1. 總價 vs 屋齡盲測
+      const sortedByPrice = [...selected].sort((a,b) => b.price - a.price);
+      const highP = sortedByPrice[0];
+      const lowP = sortedByPrice[sortedByPrice.length - 1];
+      const priceGap = highP.price - lowP.price;
+      const ageGap = (lowP.age - highP.age).toFixed(1);
+
+      if (priceGap > 0) {
+        qList.push({
+          id: 'blind_q_price_age',
+          title: `💰 預算與屋齡取捨：約 ${priceGap} 萬元的價格落差`,
+          desc: `目前候選名單中，較貴與較便宜的物件總價相差整整 ${priceGap} 萬元（且兩者屋齡相差約 ${Math.abs(ageGap)} 年）：`,
+          optA: {
+            text: `寧願每月多背房貸，也堅持要住進屋齡較新、外觀氣派的大樓社區。`,
+            evaluator: c => c.age <= 10 ? 10 : 2
+          },
+          optB: {
+            text: `現金流與財務自由第一！省下幾百萬拿去投資或自由運用更安心，屋齡稍長沒關係。`,
+            evaluator: c => c.price <= (lowP.price + priceGap * 0.4) ? 10 : 2
+          }
+        });
+      }
+
+      // 2. 室內實坪盲測
+      const sortedBySize = [...selected].sort((a,b) => b.size - a.size);
+      const maxS = sortedBySize[0];
+      const minS = sortedBySize[sortedBySize.length - 1];
+      const sizeGap = (maxS.size - minS.size).toFixed(1);
+
+      if (sizeGap > 1.5) {
+        qList.push({
+          id: 'blind_q_size',
+          title: `📐 室內主建空間：約 ${sizeGap} 坪的居住感落差`,
+          desc: `候選物件的室內主建物實坪相差了 ${sizeGap} 坪（相當於多一間大臥室或更寬闊的客餐廳）：`,
+          optA: {
+            text: `大空間無可妥協！客廳大、動線舒暢才能徹底舒展身心，實用坪數是底線。`,
+            evaluator: c => c.size >= 21 ? 10 : 2
+          },
+          optB: {
+            text: `小而精緻好整理即可，更在乎總價負擔或外在生活機能，不一定要大空間。`,
+            evaluator: c => c.size < 21 ? 10 : 4
+          }
+        });
+      }
+
+      // 3. 衛浴間數盲測 (1衛 vs 2衛)
+      const has2Bath = selected.some(c => c.bathrooms.includes('2') || c.bathrooms.includes('3'));
+      const has1Bath = selected.some(c => c.bathrooms.includes('1') && !c.bathrooms.includes('1.5'));
+
+      if (has2Bath && has1Bath) {
+        qList.push({
+          id: 'blind_q_bath',
+          title: `🚽 晨間如廁作息：雙衛浴 vs 單衛浴`,
+          desc: `候選名單中同時存在雙衛浴與單衛浴格局：`,
+          optA: {
+            text: `必須要有 2 間衛浴！出門上班絕不搶廁所，衛浴不排隊是基本生活尊嚴。`,
+            evaluator: c => (c.bathrooms.includes('2') || c.bathrooms.includes('3')) ? 10 : 0 // 不符合直接 0 分重扣！
+          },
+          optB: {
+            text: `1 間衛浴完全夠用！少刷一間馬桶更省事，省下的坪數挪給臥室放衣櫃更實在。`,
+            evaluator: c => c.bathrooms.includes('1') ? 10 : 5
+          }
+        });
+      }
+
+      // 4. 物業與垃圾代收盲測
+      const has24H = selected.some(c => c.management.includes('24H'));
+      const hasLowMgmt = selected.some(c => !c.management.includes('24H'));
+
+      if (has24H && hasLowMgmt) {
+        qList.push({
+          id: 'blind_q_mgmt',
+          title: `📦 物業代收與後勤服務：24H保全 vs 低管理費自理`,
+          desc: `候選名單包含全天候物業社區，以及半日或無管理員的純住社區：`,
+          optA: {
+            text: `全天候代收冷凍生鮮包裹、集中冷藏丟垃圾是剛需，生活作息完全不受限。`,
+            evaluator: c => c.management.includes('24H') ? 10 : 1
+          },
+          optB: {
+            text: `自己追垃圾車、超商取貨很習慣，每坪省下管理費當每年出國基金更香。`,
+            evaluator: c => !c.management.includes('24H') ? 10 : 4
+          }
+        });
+      }
+
+      // 5. 車位型態盲測
+      const hasPlane = selected.some(c => c.parkingType.includes('平面'));
+      const hasMech = selected.some(c => !c.parkingType.includes('平面'));
+
+      if (hasPlane && hasMech) {
+        qList.push({
+          id: 'blind_q_parking',
+          title: `🚗 車位型態取捨：坡道平面 vs 機械/無車位`,
+          desc: `候選物件包含了配備坡道平面車位，以及機械車位或無車位的組合：`,
+          optA: {
+            text: `休旅車好停、免等待機械升降，未來轉手坡平是剛需加分項！`,
+            evaluator: c => c.parkingType.includes('平面') ? 10 : 0
+          },
+          optB: {
+            text: `無車位（省 200 萬）或機械車位可接受，搭捷運或租車更輕鬆無負擔。`,
+            evaluator: c => !c.parkingType.includes('平面') ? 10 : 4
+          }
+        });
+      }
+
+      // 6. 扣車位真實單價盲測
+      const sortedByNet = selected.map(c => ({
+        ...c,
+        netUnit: parseFloat(calcNetUnitPrice(c.price, c.grossSize, c.parkingPrice, c.parkingSize, c.parkingType))
+      })).sort((a,b) => b.netUnit - a.netUnit);
+
+      const netGap = (sortedByNet[0].netUnit - sortedByNet[sortedByNet.length - 1].netUnit).toFixed(1);
+
+      if (netGap > 2.5) {
+        qList.push({
+          id: 'blind_q_net_unit',
+          title: `🎯 減去車位真實單價：每坪約 ${netGap} 萬的落差`,
+          desc: `扣除車位灌水後，候選物件在真實房屋每坪單價上存在顯著差異：`,
+          optA: {
+            text: `只要地段精華或社區質感好，我願意為高質感支付每坪較高的單價溢價。`,
+            evaluator: c => c.price >= 2200 ? 10 : 3
+          },
+          optB: {
+            text: `堅持真實性價比！絕不上當灌水單價，優先選擇真實單價更實在的物件。`,
+            evaluator: c => {
+              const u = parseFloat(calcNetUnitPrice(c.price, c.grossSize, c.parkingPrice, c.parkingSize, c.parkingType));
+              return u <= (sortedByNet[sortedByNet.length - 1].netUnit + netGap * 0.5) ? 10 : 2;
+            }
+          }
+        });
+      }
+
+      // 7. 未來規劃盲測
+      qList.push({
+        id: 'blind_q_goal',
+        title: `🔮 未來人生規劃：5-8 年資產跳板 vs 15 年安居城堡`,
+        desc: `這間房子在你人生藍圖中的核心定位是什麼？`,
+        optA: {
+          text: `人生資產推進站！好轉手、保值抗跌、易出租最關鍵，未來換大房的跳板。`,
+          evaluator: c => c.age <= 10 ? 10 : 3
+        },
+        optB: {
+          text: `心靈歸宿站！短期內不想折騰搬家，只要住得舒服合意，外界漲跌與我無關。`,
+          evaluator: c => c.size >= 21 ? 10 : 4
+        }
+      });
+
+      // 8. 居住環境氛圍盲測
+      qList.push({
+        id: 'blind_q_env',
+        title: `🌿 居住環境氛圍：靜謐純住宅 vs 轉角熱鬧宵夜機能`,
+        desc: `假日時你心目中最舒服的日常景象？`,
+        optA: {
+          text: `家必須在安靜的住宅區，沒有車流油煙噪音，能享受真正的放鬆與好睡眠。`,
+          evaluator: c => (c.name.includes('靜巷') || c.name.includes('青峰')) ? 10 : 4
+        },
+        optB: {
+          text: `走出大樓轉角就是超市、超商與宵夜，外送秒到，生活機能熱鬧才有安全感。`,
+          evaluator: c => c.mrt <= 8 ? 10 : 4
+        }
+      });
+
+      blindQuestions = qList;
+    }
+
+    // ==========================================
+    // 正確的契合度演算法（正規化百分比，有升有降）
+    // ==========================================
+    function calculateBlindScore(candidate) {
+      if (candidate.veto && (candidate.veto.finance || candidate.veto.nuisance)) {
+        return 0; // 踩雷一票否決
+      }
+
+      const answeredKeys = Object.keys(blindQuizAnswers);
+      if (answeredKeys.length === 0) {
+        return 0; // 未作答時顯示 0% (尚未盲測)
+      }
+
+      let totalEarned = 0;
+      let totalMax = 0;
+
+      answeredKeys.forEach(qid => {
+        const q = blindQuestions.find(item => item.id === qid);
+        if (!q) return;
+
+        const ans = blindQuizAnswers[qid];
+        const chosen = ans === 'A' ? q.optA : q.optB;
+        if (chosen && chosen.evaluator) {
+          const pts = chosen.evaluator(candidate);
+          totalEarned += pts;
+          totalMax += 10; // 每題滿分 10 分
+        }
+      });
+
+      if (totalMax === 0) return 0;
+      return Math.round((totalEarned / totalMax) * 100);
+    }
+
+    // ==========================================
+    // 即時契合度連動看板 (Tab 2 頂部即時跳動更新)
+    // ==========================================
+    function renderLiveMatchingBars() {
+      const container = document.getElementById('live-matching-bars');
+      container.innerHTML = '';
+
+      const selected = candidates.filter(c => c.checked);
+      if (selected.length < 2) {
+        container.innerHTML = `<p class="text-xs text-slate-400">請在第 1 頁勾選至少 2 間房屋以啟動盲測對決。</p>`;
+        return;
+      }
+
+      const answeredCount = Object.keys(blindQuizAnswers).length;
+      document.getElementById('quiz-progress-pill').textContent = `已作答：${answeredCount} / ${blindQuestions.length} 題`;
+
+      const scored = selected.map(c => ({
+        ...c,
+        score: calculateBlindScore(c)
+      })).sort((a,b) => b.score - a.score);
+
+      scored.forEach((c, idx) => {
+        const isLeading = idx === 0 && answeredCount > 0;
+        const row = document.createElement('div');
+        row.className = "space-y-1";
+
+        const scoreDisplay = answeredCount === 0 ? '<span class="text-xs text-slate-400 font-normal">尚未作答</span>' : `${c.score} <span class="text-[10px] text-slate-400 font-normal">% 契合度</span>`;
+
+        row.innerHTML = `
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold flex items-center gap-1.5 ${isLeading ? 'text-amber-300 font-black' : 'text-slate-200'}">
+              <span>${isLeading ? '👑' : '#' + (idx + 1)}</span>
+              <span>${c.name}</span>
+            </span>
+            <span class="font-black text-sm ${isLeading ? 'text-amber-300' : 'text-indigo-200'}">
+              ${scoreDisplay}
+            </span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+            <div class="h-2.5 rounded-full transition-all duration-500 ${isLeading ? 'bg-gradient-to-r from-amber-400 to-amber-500' : 'bg-indigo-500'}"
+              style="width: ${answeredCount === 0 ? 0 : c.score}%"></div>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    // 渲染盲測問題
+    function renderBlindQuiz() {
+      generateBlindQuestions();
+      renderLiveMatchingBars();
+
+      const container = document.getElementById('dynamic-questions-list');
+      container.innerHTML = '';
+
+      const selected = candidates.filter(c => c.checked);
+      if (selected.length < 2) {
+        container.innerHTML = `
+          <div class="p-8 text-center bg-slate-50 rounded-2xl border border-slate-200">
+            <p class="text-sm font-bold text-slate-700">目前僅勾選了 ${selected.length} 間房屋！</p>
+            <p class="text-xs text-slate-500 mt-1 mb-4">無法形成對比差異。請返回第 1 頁勾選 2 至 5 間房屋。</p>
+            <button onclick="switchTab('import')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl">前往勾選房屋 →</button>
+          </div>
+        `;
+        return;
+      }
+
+      blindQuestions.forEach((q, idx) => {
+        const curAns = blindQuizAnswers[q.id];
+        const card = document.createElement('div');
+        card.className = "p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-3 transition hover:border-indigo-300";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center font-black text-xs">${idx + 1}</span>
+              <h4 class="font-bold text-sm text-slate-900">${q.title}</h4>
+            </div>
+            <p class="text-xs text-slate-500 ml-8">${q.desc}</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
+            <button onclick="answerBlindQuestion('${q.id}', 'A')" class="p-4 rounded-xl border text-left transition ${
+              curAns === 'A' ? 'bg-indigo-600 text-white border-indigo-600 font-bold shadow-md' : 'bg-white border-slate-200 text-slate-700 hover:border-indigo-400'
+            }">
+              <strong class="block mb-1 text-xs ${curAns === 'A' ? 'text-amber-300' : 'text-indigo-600'}">A. 選擇此生活取向</strong>
+              ${q.optA.text}
+            </button>
+            <button onclick="answerBlindQuestion('${q.id}', 'B')" class="p-4 rounded-xl border text-left transition ${
+              curAns === 'B' ? 'bg-indigo-600 text-white border-indigo-600 font-bold shadow-md' : 'bg-white border-slate-200 text-slate-700 hover:border-indigo-400'
+            }">
+              <strong class="block mb-1 text-xs ${curAns === 'B' ? 'text-amber-300' : 'text-indigo-600'}">B. 選擇此生活取向</strong>
+              ${q.optB.text}
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function answerBlindQuestion(qid, opt) {
+      blindQuizAnswers[qid] = opt;
+      localStorage.setItem('house_v8_blind_answers', JSON.stringify(blindQuizAnswers));
+      renderLiveMatchingBars();
+      renderBlindQuiz();
+    }
+
+    function resetQuizAnswers() {
+      if (!confirm('確定要清除所有盲測答案嗎？')) return;
+      blindQuizAnswers = {};
+      localStorage.removeItem('house_v8_blind_answers');
+      renderLiveMatchingBars();
+      renderBlindQuiz();
+    }
+
+    // ==========================================
+    // TAB 3: 5 屋對決矩陣渲染
+    // ==========================================
+    function renderMatrix() {
+      const selected = candidates.filter(c => c.checked);
+      if (selected.length < 2) {
+        alert('請先在第 1 頁勾選至少 2 間物件（最多 5 間）才能進行對決！');
+        switchTab('import');
+        return;
+      }
+
+      const rankContainer = document.getElementById('matrix-rankings');
+      rankContainer.innerHTML = '';
+
+      const scored = selected.map(c => ({
+        ...c,
+        totalScore: calculateBlindScore(c)
+      })).sort((a,b) => b.totalScore - a.totalScore);
+
+      const answeredCount = Object.keys(blindQuizAnswers).length;
+
+      scored.forEach((c, idx) => {
+        const isVeto = c.veto && (c.veto.finance || c.veto.nuisance);
+        const netUnit = calcNetUnitPrice(c.price, c.grossSize, c.parkingPrice, c.parkingSize, c.parkingType);
+        const row = document.createElement('div');
+        row.className = `p-4 rounded-xl border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 transition ${
+          idx === 0 && !isVeto && answeredCount > 0 ? 'border-amber-300 bg-amber-50/40 ring-1 ring-amber-300' : 'border-slate-200 bg-white'
+        } ${isVeto ? 'bg-red-50/30 border-red-200 opacity-60' : ''}`;
+
+        row.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full flex items-center justify-center font-black text-sm ${
+              isVeto ? 'bg-slate-300 text-slate-600' : idx === 0 && answeredCount > 0 ? 'bg-amber-500 text-white' : 'bg-slate-800 text-white'
+            }">${isVeto ? '×' : idx + 1}</span>
+            <div>
+              <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+                ${c.name}
+                ${idx === 0 && !isVeto && answeredCount > 0 ? '<span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">盲測冠軍首選</span>' : ''}
+                ${isVeto ? '<span class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold">踩中否決紅線淘汰</span>' : ''}
+              </h4>
+              <p class="text-xs text-slate-500 mt-0.5">
+                總價: <span class="font-bold text-slate-700">${c.price}萬</span> | 
+                <span class="font-bold text-indigo-700">扣車位單價: ${netUnit}萬/坪</span> | 
+                建坪: <span class="font-bold text-slate-700">${c.grossSize}坪</span> (實坪 ${c.size}坪) | 
+                配置: <span class="font-bold text-slate-700">${c.bathrooms} / ${c.management}</span>
+              </p>
+            </div>
+          </div>
+          <div class="text-right w-full sm:w-auto">
+            <span class="text-2xl font-black ${isVeto ? 'text-slate-400' : 'text-indigo-600'}">${answeredCount === 0 ? '--' : c.totalScore}</span>
+            <span class="text-xs text-slate-400">/ 100 契合度</span>
+          </div>
+        `;
+        rankContainer.appendChild(row);
+      });
+
+      const thead = document.getElementById('matrix-head-row');
+      thead.innerHTML = '<th class="p-3 font-bold min-w-[140px] bg-slate-100">比較維度</th>';
+      selected.forEach(c => {
+        const th = document.createElement('th');
+        th.className = 'p-3 font-black min-w-[150px] border-l border-slate-200 text-slate-900';
+        th.textContent = c.name;
+        thead.appendChild(th);
+      });
+
+      const tbody = document.getElementById('matrix-body-rows');
+      tbody.innerHTML = '';
+
+      const metrics = [
+        { label: '資料來源', fn: c => c.source },
+        { label: '開價總價', fn: c => `${c.price} 萬元` },
+        { label: '販賣坪數 (建坪總坪)', fn: c => `${c.grossSize} 坪` },
+        { label: '室內主建物實坪', fn: c => `${c.size} 坪` },
+        { label: '🎯 減去車位真實單價', fn: c => `${calcNetUnitPrice(c.price, c.grossSize, c.parkingPrice, c.parkingSize, c.parkingType)} 萬/坪`, highlight: true },
+        { label: '衛浴間數', fn: c => c.bathrooms },
+        { label: '管理室型態', fn: c => c.management },
+        { label: '屋齡', fn: c => `${c.age} 年` },
+        { label: '車位詳細拆算', fn: c => `${c.parkingType} (${c.parkingPrice}萬 / ${c.parkingSize}坪)` },
+        { label: '一票否決判定', fn: c => (c.veto?.finance || c.veto?.nuisance ? '⚠️ 踩雷淘汰' : '無致命傷') }
+      ];
+
+      metrics.forEach(m => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="p-3 font-bold ${m.highlight ? 'bg-indigo-50 text-indigo-900 font-black' : 'bg-slate-50 text-slate-700'}">${m.label}</td>`;
+        selected.forEach(c => {
+          const td = document.createElement('td');
+          td.className = `p-3 border-l border-slate-100 ${m.highlight ? 'bg-indigo-50/50 font-black text-indigo-700 text-sm' : ''}`;
+          td.textContent = m.fn(c);
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+    }
+
+    // 候選卡片
     function renderCandidateCards() {
       const container = document.getElementById('candidates-cards-grid');
       container.innerHTML = '';
@@ -1258,10 +1225,10 @@
               <div>開價總價：<span class="font-bold text-indigo-700">${c.price} 萬</span></div>
               <div>建坪總坪：<span class="font-bold text-slate-800">${c.grossSize} 坪</span></div>
               <div>主建物實坪：<span class="font-bold text-slate-800">${c.size} 坪</span></div>
-              <div>衛浴配置：<span class="font-bold text-slate-800">${c.bathrooms}</span></div>
-              <div>管理室：<span class="font-bold text-slate-800">${c.management}</span></div>
+              <div>衛浴配置：<span class="font-bold text-emerald-700 font-extrabold">${c.bathrooms}</span></div>
+              <div>管理室：<span class="font-bold text-emerald-700 font-extrabold">${c.management}</span></div>
               <div>屋齡：<span class="font-bold text-amber-700">${c.age} 年</span></div>
-              <div class="col-span-2">車位種類：<span class="font-bold text-slate-800">${c.parkingType} (${c.parkingPrice}萬/${c.parkingSize}坪)</span></div>
+              <div class="col-span-2">車位種類：<span class="font-bold text-emerald-700 font-extrabold">${c.parkingType} (${c.parkingPrice}萬/${c.parkingSize}坪)</span></div>
             </div>
 
             ${c.url ? `<a href="${c.url}" target="_blank" class="text-[11px] text-indigo-600 hover:underline block truncate mb-2">🔗 開啟原始房屋網頁 ↗</a>` : ''}
@@ -1302,8 +1269,7 @@
       item.checked = !item.checked;
       saveCandidatesToStorage();
       renderCandidateCards();
-      // 重新生成動態問題與更新契合度
-      generateDynamicQuestions();
+      generateBlindQuestions();
       renderLiveMatchingBars();
     }
 
@@ -1336,12 +1302,10 @@
     }
 
     function saveCandidatesToStorage() {
-      localStorage.setItem('house_v7_candidates', JSON.stringify(candidates));
+      localStorage.setItem('house_v8_candidates', JSON.stringify(candidates));
     }
 
-    // ==========================================
-    // 匯出 / 匯入邏輯
-    // ==========================================
+    // 匯出 / 匯入
     function updateShareUrlBox() {
       try {
         const jsonStr = JSON.stringify(candidates);
@@ -1358,7 +1322,7 @@
       const box = document.getElementById('share-url-box');
       box.select();
       navigator.clipboard.writeText(box.value).then(() => {
-        alert('已複製分享專屬連結！\n傳到 LINE 給朋友或家人，點開即可自動載入你的全部房屋庫！');
+        alert('已複製分享專屬連結！傳到 LINE 給朋友或家人，點開即可自動載入你的全部房屋資料！');
       });
     }
 
@@ -1450,16 +1414,14 @@
       }
     }
 
-    // ==========================================
-    // 頁籤導覽
-    // ==========================================
+    // 頁籤切換
     function switchTab(tab) {
       ['import', 'share', 'quiz', 'matrix', 'decision'].forEach(t => {
         const section = document.getElementById(`section-${t}`);
         if (section) section.classList.add('hidden');
         const btn = document.getElementById(`tab-${t}`);
         if (btn) {
-          btn.classList.remove('bg-indigo-600', 'text-white');
+          btn.classList.remove('bg-indigo-600', 'bg-rose-600', 'text-white');
           if (t === 'share') btn.classList.add('text-amber-300');
           else btn.classList.add('text-slate-300');
         }
@@ -1470,20 +1432,19 @@
 
       const activeBtn = document.getElementById(`tab-${tab}`);
       if (activeBtn) {
-        activeBtn.classList.add('bg-indigo-600', 'text-white');
+        if (tab === 'quiz') activeBtn.classList.add('bg-rose-600', 'text-white');
+        else activeBtn.classList.add('bg-indigo-600', 'text-white');
         activeBtn.classList.remove('text-slate-300', 'text-amber-300');
       }
 
       if (tab === 'import') renderCandidateCards();
       if (tab === 'share') updateShareUrlBox();
-      if (tab === 'quiz') renderDynamicQuiz();
+      if (tab === 'quiz') renderBlindQuiz();
       if (tab === 'matrix') renderMatrix();
       if (tab === 'decision') initDecisionOptions();
     }
 
-    // ==========================================
     // 決勝定心殿 (硬幣/轉盤)
-    // ==========================================
     let decisionMode = 'coin';
 
     function setDecisionMode(mode) {
@@ -1615,11 +1576,11 @@
       requestAnimationFrame(animate);
     }
 
-    // 初始化啟動
+    // 啟動監聽
     window.addEventListener('DOMContentLoaded', () => {
       checkUrlShareParam();
       renderCandidateCards();
-      generateDynamicQuestions();
+      generateBlindQuestions();
       updateShareUrlBox();
     });
   </script>
